@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>girlfriend_v6.0.1_release_notes</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #terminal {
+      background-color: #2d2d2d;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.2);
+      white-space: pre-wrap;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: #d4d4d4;
+      animation: blink 1s steps(2, start) infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    #manualButton {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1rem;
+      background-color: #3a3a3a;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #manualModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #manualContent {
+      background-color: #2d2d2d;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      color: #d4d4d4;
+      box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+    }
+    #closeManual {
+      margin-top: 1rem;
+      padding: 0.3rem 0.8rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      background-color: #444;
+      border: 1px solid #00ffaa;
+      color: #00ffaa;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <div id="manualButtonContainer" style="display: none; flex-direction: column; align-items: center;">
+    <button id="manualButton">打开说明书 📖</button>
+  </div>
+
+  <div id="manualModal">
+    <div id="manualContent">
+      <div>Logitech MX Master 3S 使用说明书：<br>
+      ①你跟我说现在上班的时候桌面上有4台电脑，这个鼠标可以多端切换，而且它能多端拖拽文件，对mac+win的工作非常方便。<br>
+      ②你说今年除了考英语，还要着重提高专业技术。专业技术我帮不上，但是我觉得它看起来就很适合专业程序员😎<br>
+      ③你用不惯垂直鼠标，这个是有点人体工学但整体还是标准鼠标的形状，应该能用的惯。<br>
+      ④这个不仅安静，滚轴也很好，滑动起来更丝滑！我特意查了一秒最多可以滑1000行！蛮适合你们coding的时候行数多的！<br>
+      ⑤你上次来我家打游戏用的鼠标还是原来的雷蛇有线，那个有点旧了，这个反应也快没什么延迟的，打游戏工作都能用，也是有线，2.4G，蓝牙三模的⚡️<br><br>
+      来自你专业外设支持部部长：Martina 🫡
+      </div>
+      <button id="closeManual">关闭说明书</button>
+    </div>
+  </div>
+
+  <script>
+    const lines = `
+==============================
+Girlfriend-v6.0.1-Release.exe
+==============================
+
+Initialising...
+Loading modules: ❤️ Love Engine, 🎨 Creativity Suite, 🧠 Memory Manager...
+
+[INFO] Release Date: 2025-07-02
+[INFO] Maintainer: Martina <martinayang98@lovemail.com>
+
+--------------------------
+|     RELEASE NOTES      |
+--------------------------
+
+* Version: 6.0.1 - "Love and Growth"
+
+* New Features:
+  - [✔] Patience Module v2.3 integrated
+  - [✔] Memory Manager optimised
+  - [✔] Cuddle Mode enhanced
+
+* Bug Fixes:
+  - [!] Excessive caffeine causing hyperactivity
+  - [!] Phone distraction during code time
+  - [!] Logic system temporarily overridden during emotional turbulence
+
+* Planned Features (v7.0 Preview):
+  - [ ] Surprise Date Night Generator
+  - [ ] Camping Mode: auto-organised
+  - [ ] Fitness Partner Mode 2.0
+
+---------------------------
+|    MAINTAINER NOTES     |
+---------------------------
+
+Thanks for being my bug-fixer 💛
+Thanks for coding this stage of life together with me.
+
+>>> gift.unbox("MX Master 3S")
+[click the button for manural]
+
+================================
+Process completed successfully.
+================================
+`;
+
+    const terminal = document.getElementById("terminal");
+    const manualBtnContainer = document.getElementById("manualButtonContainer");
+    let i = 0;
+
+    function typeLine() {
+      if (i < lines.length) {
+        const currentText = lines.substring(0, i++);
+        terminal.innerHTML = currentText + '<span class="cursor"></span>';
+        if (currentText.includes("[click the button for manural]")) {
+          manualBtnContainer.style.display = 'flex';
+        }
+        setTimeout(typeLine, 10);
+      } else {
+        terminal.innerHTML = lines;
+      }
+    }
+    typeLine();
+
+    document.getElementById("manualButton").addEventListener("click", () => {
+      document.getElementById("manualModal").style.display = "flex";
+    });
+    document.getElementById("closeManual").addEventListener("click", () => {
+      document.getElementById("manualModal").style.display = "none";
+    });
+  </script>
+</body>
+</html>
